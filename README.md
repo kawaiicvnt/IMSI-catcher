@@ -12,8 +12,8 @@ This program shows you IMSI numbers, country, brand and operator of cellphones a
 
 1 PC with Gnu/Linux. Tested with :  
 - debian 10  
-- Ubuntu 20.04/LinuxMint 20+  
-- Kali 2020+  
+- Ubuntu 20.04/LinuxMint 22.2+  
+- Kali 2025+  
   
 1 SDR receiver. Tested with :  
 - [USB DVB-T key (RTL2832U)](https://osmocom.org/projects/sdr/wiki/rtl-sdr) with antenna (less than 15$)  
@@ -34,58 +34,10 @@ cd IMSI-catcher-master
 ```
   
 ```bash
-sudo apt install python3-numpy python3-scipy python3-scapy
+sudo apt install python3-numpy python3-scipy python3-scapy gr-gsm
 ```
 Warning : don't use python 3.9 (ctypes bug)!  
-  
-You have the choice with 2 types of gr-gsm's install : in your OS or with docker.  
-  
-### Install gr-gsm in your OS (recommended)
 
-```bash
-sudo apt-get install -y \
-    cmake \
-    autoconf \
-    libtool \
-    pkg-config \
-    build-essential \
-    python3-docutils \
-    libcppunit-dev \
-    swig \
-    doxygen \
-    liblog4cpp5-dev \
-    gnuradio-dev \
-    gr-osmosdr \
-    libosmocore-dev \
-    liborc-0.4-dev \
-    swig
-```
-```bash
-gnuradio-config-info -v
-```
-if >= 3.10 (read this [AskUbuntu answer](https://askubuntu.com/a/1436119/) for details):
-```bash
-git clone -b maint-3.10_with_multiarfcn https://github.com/bkerler/gr-gsm
-```
-else if >= 3.8:
-```bash
-git clone -b maint-3.8 https://github.com/velichkov/gr-gsm.git
-```
-else (3.7):
-```bash
-git clone https://git.osmocom.org/gr-gsm
-```
-  
-```bash
-cd gr-gsm
-mkdir build
-cd build
-cmake ..
-make -j 4
-sudo make install
-sudo ldconfig
-echo 'export PYTHONPATH=/usr/local/lib/python3/dist-packages/:$PYTHONPATH' >> ~/.bashrc
-```
 
 ### Importlib vs Imp
 Beginning with Python 3.1, Imp is replaced by importlib. Imp is deprecated in Python 3.11, with the new requirements met as follows.
@@ -95,7 +47,7 @@ apt install python3-pip
 pip install importlib
 ```
 
-### Install gr-gsm with Docker
+### Install gr-gsm with Docker (not recommended)
 
 ```bash
 sudo xhost +local:docker
